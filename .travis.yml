@@ -3,7 +3,7 @@ notifications:
   email: false
 node_js:
   - '8'
-  - 'stable'
+  - '9'
 before_script:
   - npm run build
 after_success:
