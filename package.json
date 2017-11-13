@@ -1,0 +1,28 @@
+{
+  "name": "lemon-ts",
+  "version": "1.0.0",
+  "bin": "dist/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/execa": "^0.7.2",
+    "@types/node": "^8.0.51",
+    "@types/yargs": "^8.0.2",
+    "execa": "^0.8.0",
+    "hard-rejection": "^1.0.0",
+    "prettier-eslint-cli": "^4.4.0",
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.3.1",
+    "typescript": "^2.6.1",
+    "yargs": "^10.0.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "semi": false
+  },
+  "scripts": {
+    "format": "prettier src/**/*.ts --write",
+    "build": "tsc --pretty && chmod +x dist/index.js",
+    "watch": "tsc --pretty --watch"
+  }
+}
