@@ -1,6 +1,6 @@
 {
   "name": "lemon-ts",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "bin": "dist/index.js",
   "license": "MIT",
   "dependencies": {
@@ -23,6 +23,15 @@
   "scripts": {
     "format": "prettier src/**/*.ts --write",
     "build": "tsc --pretty && chmod +x dist/index.js",
-    "watch": "tsc --pretty --watch"
+    "watch": "tsc --pretty --watch",
+    "semantic-release":
+      "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yellowiki/lemon-ts.git"
+  },
+  "devDependencies": {
+    "semantic-release": "^8.2.0"
   }
 }
