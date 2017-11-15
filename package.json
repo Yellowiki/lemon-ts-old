@@ -26,7 +26,8 @@
     "format": "prettier src/**/*.ts --write",
     "build": "tsc --pretty && chmod +x dist/index.js",
     "watch": "tsc --pretty --watch",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release":
+      "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -34,5 +35,6 @@
   },
   "devDependencies": {
     "semantic-release": "^8.2.0"
-  }
+  },
+  "files": ["dist"]
 }
