@@ -36,5 +36,5 @@
   "devDependencies": {
     "semantic-release": "^8.2.0"
   },
-  "files": ["dist"]
+  "files": ["dist", "tsconfig.json", "tslint.json"]
 }
