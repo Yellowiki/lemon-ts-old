@@ -3,6 +3,8 @@
 import 'hard-rejection/register'
 
 import execa = require('execa')
+import fsExtra = require('fs-extra')
+import * as os from 'os'
 import * as path from 'path'
 import yargs = require('yargs')
 
@@ -20,6 +22,9 @@ const { argv } = yargs
         '--project',
         path.resolve(__dirname, '../tsconfig.json'),
       ])
+      if (os.platform() !== 'win32') {
+        await fsExtra.chmod('dist/index.js', '755')
+      }
     },
   )
   .command(
