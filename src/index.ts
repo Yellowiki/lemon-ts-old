@@ -17,13 +17,14 @@ const { argv } = yargs
     'build TypeScript project',
     y => y,
     async () => {
-      await execa('tsc', [
-        '--pretty',
-        '--project',
-        path.resolve(__dirname, '../tsconfig.json'),
-      ])
+      const tsConfigPath = path.resolve(__dirname, '../tsconfig.json')
+      await fsExtra.copy(tsConfigPath, 'tsconfig.json')
+      await execa('tsc', ['--pretty'])
+      await fsExtra.unlink('tsconfig.json')
       if (os.platform() !== 'win32') {
-        await fsExtra.chmod('dist/index.js', '755')
+        try {
+          await fsExtra.chmod('dist/index.js', '755')
+        } catch (e) {}
       }
     },
   )
