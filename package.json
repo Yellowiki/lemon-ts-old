@@ -11,6 +11,8 @@
     "@types/yargs": "^8.0.2",
     "execa": "^0.8.0",
     "fs-extra": "^4.0.2",
+    "glob": "^7.1.2",
+    "glob-promise": "^3.3.0",
     "hard-rejection": "^1.0.0",
     "tslint": "^5.8.0",
     "tslint-config-airbnb": "^5.3.1",

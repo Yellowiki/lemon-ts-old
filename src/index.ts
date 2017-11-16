@@ -4,6 +4,7 @@ import 'hard-rejection/register'
 
 import execa = require('execa')
 import fsExtra = require('fs-extra')
+import globPromise = require('glob-promise')
 import * as os from 'os'
 import * as path from 'path'
 import yargs = require('yargs')
@@ -17,10 +18,23 @@ const { argv } = yargs
     'build TypeScript project',
     y => y,
     async () => {
-      const tsConfigPath = path.resolve(__dirname, '../tsconfig.json')
-      await fsExtra.copy(tsConfigPath, 'tsconfig.json')
-      await execa('tsc', ['--pretty'])
-      await fsExtra.unlink('tsconfig.json')
+      await execa('tsc', [
+        '--pretty',
+        '--module',
+        'commonjs',
+        '--target',
+        'es5',
+        '--lib',
+        'es2015,es2017,esnext',
+        '--outDir',
+        'dist',
+        '--strict',
+        '--declaration',
+        '--listFiles',
+        '--noImplicitAny',
+        'false',
+        ...(await globPromise.promise('src/**/*.ts')),
+      ])
       if (os.platform() !== 'win32') {
         try {
           await fsExtra.chmod('dist/index.js', '755')
