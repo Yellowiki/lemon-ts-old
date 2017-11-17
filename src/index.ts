@@ -19,7 +19,7 @@ function exec(file, options) {
   return p
 }
 
-const { argv } = yargs
+yargs
   .command(
     'build',
     'build TypeScript project',
@@ -38,6 +38,8 @@ const { argv } = yargs
         '--strict',
         '--declaration',
         '--noImplicitAny',
+        '--noUnusedLocals',
+        '--noUnusedParameters',
         'false',
         ...(await globPromise.promise('src/**/*.ts')),
       ])
@@ -75,4 +77,4 @@ const { argv } = yargs
       await exec('tslint', ['--config', tslintConfig, glob])
     },
   )
-  .demandCommand(1)
+  .demandCommand(1).argv

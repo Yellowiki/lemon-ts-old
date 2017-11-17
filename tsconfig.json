@@ -6,7 +6,9 @@
     "outDir": "dist",
     "strict": true,
     "declaration": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
