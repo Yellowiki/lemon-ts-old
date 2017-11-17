@@ -12,13 +12,20 @@ import yargs = require('yargs')
 const glob = '{src,test}/**/*.ts'
 const tslintConfig = path.resolve(__dirname, '../tslint.json')
 
+function exec(file, options) {
+  const p = execa(file, options)
+  p.stdout.pipe(process.stdout)
+  p.stderr.pipe(process.stderr)
+  return p
+}
+
 const { argv } = yargs
   .command(
     'build',
     'build TypeScript project',
     y => y,
     async () => {
-      await execa('tsc', [
+      await exec('tsc', [
         '--pretty',
         '--module',
         'commonjs',
@@ -30,7 +37,6 @@ const { argv } = yargs
         'dist',
         '--strict',
         '--declaration',
-        '--listFiles',
         '--noImplicitAny',
         'false',
         ...(await globPromise.promise('src/**/*.ts')),
@@ -47,7 +53,7 @@ const { argv } = yargs
     'prettify TypeScript project',
     y => y,
     async () => {
-      await execa('prettier', [
+      await exec('prettier', [
         'fix',
         glob,
         '--write',
@@ -57,8 +63,8 @@ const { argv } = yargs
         'all',
         '--no-config',
       ])
-      await execa('tslint', ['--fix', '--config', tslintConfig, glob])
-      await execa('prettier', ['package.json', '--write'])
+      await exec('tslint', ['--fix', '--config', tslintConfig, glob])
+      await exec('prettier', ['package.json', '--write'])
     },
   )
   .command(
@@ -66,7 +72,7 @@ const { argv } = yargs
     'lint TypeScript project',
     y => y,
     async () => {
-      await execa('tslint', ['--config', tslintConfig, glob])
+      await exec('tslint', ['--config', tslintConfig, glob])
     },
   )
   .demandCommand(1)
