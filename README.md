@@ -1,5 +1,7 @@
 # lemon-ts
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Yellowiki/lemon-ts.svg)](https://greenkeeper.io/)
+
 ## Simplify your TypeScript development
 ---
 
